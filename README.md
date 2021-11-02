@@ -71,3 +71,44 @@ Collaborators will then receive the migration file next time they make a commit 
 If you re-clone the repo:
 
 local_settings.py will be gone, be sure to save the one from previous version, or have partner send it over slack if you lost it.
+
+  <!--
+{% extends 'employees\employee_base.html' %}
+
+{% block title %} Employee Home {% endblock %}
+
+{% block header %} Employee Portal {% endblock %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+        Hello {{ logged_in_employee.name }}!<br />
+        Address: {{ logged_in_employee.address }} {{logged_in_employee.zip_code }}<br />
+  Current balance: $ {{ logged_in_employee.balance }}.00
+        <br />
+        <br />
+        {% if today > logged_in_employee.suspend_start and today < logged_in_employee.suspend_end %}
+          Your pickups are suspended until {{ logged_in_employee.suspend_end }}
+
+        {% endif %}
+
+  {% else %}
+    <p>You are at the employee index, but you are not logged in.</p>
+    <a href="{% url 'login' %}">Log In</a>
+    <a href="{% url 'accounts:register' %}">Sign Up</a>
+  {% endif %}
+{% endblock %}
+-->
+
+{% extends 'base.html' %}
+
+{% block title %}{% block header %} Employee Home {% endblock %}{% endblock %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    Hello Employee {{ user.username }}!
+  {% else %}
+    <p>You are at the employee index, but you are not logged in.</p>
+    <a href="{% url 'login' %}">Log In</a>
+    <a href="{% url 'accounts:register' %}">Sign Up</a>
+  {% endif %}
+{% endblock %}
