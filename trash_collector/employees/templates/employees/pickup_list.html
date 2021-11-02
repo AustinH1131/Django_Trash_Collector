@@ -6,21 +6,27 @@
 <form action="{% url 'employees:pickup_list' %}" method="post">
 <head>Pickup Routes</head>
 <p>
-<ul>customer name
-{% for customer in customer_zip%}
-<table border=1>
-<tr><th>(Name)</th>
-    <th>(Weekly Pickup)</th>
-    <th>(One Time Pickup)</th>
-    <th>(Active)</th>
-        <th>Picked Up Today</th></tr>       
-<tr>    <td>{{customer.name}} </td>
-        <td>{{customer.weekly_pickup}}</td>
-        <td>{{customer.one_time_pickup}}</td>
-        <td>{{customer.is_active}}</td>
-        <td>{{customer.date_of_last_pickup}}</td></tr>
+    {%csrf_token%}
+
+<table border=5>
+    <tr>  
+        <th>(Name)</th>
+        <th>(Weekly Pickup)</th> 
+        <th>Confirm Pickup </th>
+        <th>(One Time Pickup)</th> 
+        <th>(Active)</th> 
+        <th>(Picked Up Today)</th>
+    </tr>  
+    {% for customer in customer_zip%}     
+    <tr><td>{{customer.name}} </td> 
+        <td>{{customer.weekly_pickup}}</td> 
+        <td><a hfer = "{% url 'employees:pickup_confirm' customer.id %}">Confirm (Trust me, this is a button)</a> </td>
+        <td>{{customer.one_time_pickup}}</td> 
+        <td>{{customer.is_active}}</td> 
+        <td>{{customer.date_of_last_pickup}}</td>
+    </tr>
+    {%endfor%}
 </table>
-{%endfor%}
 
 
 

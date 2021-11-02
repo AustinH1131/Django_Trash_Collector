@@ -34,7 +34,7 @@ It is your task to build out the employee-side of this application to allow empl
 
 - Trash has not yet been picked up today
 
-(10 points): As a registered employee, I want a button/link displayed with each pickup in my daily list that I can click to “confirm” a pickup.
+(10 points): As a registered employee, I want a button/link displayed with each pickup in my daily list that I can click to “confirm” a pickup. ------Finish------
 
 (5 points): As a registered employee, I want all confirmed pickups to have a charge of $20 applied to the customer.
 
@@ -116,3 +116,5 @@ local_settings.py will be gone, be sure to save the one from previous version, o
 {% endblock %}
 
 -->
+
+pickup_confirmed({{customer.balance}})

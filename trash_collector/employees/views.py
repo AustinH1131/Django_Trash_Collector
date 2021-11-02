@@ -87,3 +87,16 @@ def pickup_list(request):
   
         return render(request, 'employees/pickup_list.html', context)
 
+@login_required
+def pickup_confirm(request, customer_balance):
+        # Customer = apps.get_model('customers.Customer')
+        # customer_pickup= Customer.objects.filter(zip_code = employee_zip)
+        # context={
+        #     "customer_zip" : customer_zip
+        # }      
+        customer_balance +=20
+        customer_balance.save()
+        return render(request, 'employees/pickup_list.html')
+  
+        # return render(request, 'employees/pickup_list.html', context)
+
