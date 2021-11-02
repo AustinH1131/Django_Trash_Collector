@@ -1,0 +1,33 @@
+{% extends 'employees\employee_base.html' %}
+
+{% block title %} Employee Pickup List {% endblock %}
+{% block content %}
+<br />
+<form action="{% url 'employees:pickup_list' %}" method="post">
+<head>Pickup Routes</head>
+<p>
+<ul>customer name
+{% for customer in customer_zip%}
+<table border=1>
+<tr><th>(Name)</th>
+    <th>(Weekly Pickup)</th>
+    <th>(One Time Pickup)</th>
+    <th>(Active)</th>
+        <th>Picked Up Today</th></tr>       
+<tr>    <td>{{customer.name}} </td>
+        <td>{{customer.weekly_pickup}}</td>
+        <td>{{customer.one_time_pickup}}</td>
+        <td>{{customer.is_active}}</td>
+        <td>{{customer.date_of_last_pickup}}</td></tr>
+</table>
+{%endfor%}
+
+
+
+
+
+
+
+</ul>
+</p>
+{% endblock %}

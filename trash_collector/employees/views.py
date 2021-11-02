@@ -72,4 +72,18 @@ def edit_profile(request):
             'logged_in_employee': logged_in_employee
         }
         return render(request, 'employees/edit_profile.html', context)
-        
+
+
+@login_required
+def pickup_list(request):
+        logged_in_user=request.user
+        logged_in_employee = Employee.objects.get(user=logged_in_user)
+        Customer = apps.get_model('customers.Customer')
+        employee_zip= logged_in_employee.zip_code
+        customer_zip= Customer.objects.filter(zip_code = employee_zip)
+        context={
+            "customer_zip" : customer_zip
+        }      
+  
+        return render(request, 'employees/pickup_list.html', context)
+

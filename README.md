@@ -99,6 +99,8 @@ local_settings.py will be gone, be sure to save the one from previous version, o
 {% endblock %}
 -->
 
+<!--
+
 {% extends 'base.html' %}
 
 {% block title %}{% block header %} Employee Home {% endblock %}{% endblock %}
@@ -112,3 +114,5 @@ local_settings.py will be gone, be sure to save the one from previous version, o
     <a href="{% url 'accounts:register' %}">Sign Up</a>
   {% endif %}
 {% endblock %}
+
+-->
