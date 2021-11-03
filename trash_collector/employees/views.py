@@ -77,11 +77,12 @@ def edit_profile(request):
 
 @login_required
 def pickup_list(request):
+    curr_date = date.today()
     logged_in_user=request.user
     logged_in_employee = Employee.objects.get(user=logged_in_user)
     Customer = apps.get_model('customers.Customer')
     employee_zip= logged_in_employee.zip_code
-    customer_zip= Customer.objects.filter(zip_code = employee_zip)
+    customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup = (calendar.day_name[curr_date.weekday()]))
     context={
         "customer_zip" : customer_zip
     }      
@@ -94,6 +95,7 @@ def pickup_confirm(request, customer_id):
     customer_object = Customer.objects.get(pk=customer_id)
     # date_pickup = customer_object.date_of_last_pickup
     customer_object.date_of_last_pickup = date.today()
+    customer_object.balance -= 20
     customer_object.save()
         # Customer = apps.get_model('customers.Customer')
         # customer_pickup= Customer.objects.filter(zip_code = employee_zip)
