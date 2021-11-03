@@ -123,3 +123,6 @@ pickup_confirmed({{customer.balance}})
 to get the day of week as string
 curr_date = date.today()
 .filter(weekly_pickup = (calendar.day_name[curr_date.weekday()])
+
+chain on suspended date filter
+ | Q (suspend_end <= curr_date)
