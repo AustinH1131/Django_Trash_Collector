@@ -3,6 +3,7 @@ from django.shortcuts import render,redirect
 from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from datetime import date
 import calendar
 from django.apps import apps
@@ -82,7 +83,9 @@ def pickup_list(request):
     logged_in_employee = Employee.objects.get(user=logged_in_user)
     Customer = apps.get_model('customers.Customer')
     employee_zip= logged_in_employee.zip_code
-    customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup = (calendar.day_name[curr_date.weekday()]))
+    customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup = (calendar.day_name[curr_date.weekday()] or one_time_pickup == (curr_date.weekday))
+    # customer_zip= Customer.objects.filter(Q(zip_code = employee_zip) | Q(weekly_pickup = (calendar.day_name[curr_date.weekday()])) | Q(one_time_pickup = (curr_date.weekday())))
+  
     context={
         "customer_zip" : customer_zip
     }      
