@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from datetime import date
+import calendar
 from django.apps import apps
 
 from .models import Employee
@@ -76,27 +77,33 @@ def edit_profile(request):
 
 @login_required
 def pickup_list(request):
-        logged_in_user=request.user
-        logged_in_employee = Employee.objects.get(user=logged_in_user)
-        Customer = apps.get_model('customers.Customer')
-        employee_zip= logged_in_employee.zip_code
-        customer_zip= Customer.objects.filter(zip_code = employee_zip)
-        context={
-            "customer_zip" : customer_zip
-        }      
-  
-        return render(request, 'employees/pickup_list.html', context)
+    curr_date = date.today()
+    logged_in_user=request.user
+    logged_in_employee = Employee.objects.get(user=logged_in_user)
+    Customer = apps.get_model('customers.Customer')
+    employee_zip= logged_in_employee.zip_code
+    customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup = (calendar.day_name[curr_date.weekday()]))
+    context={
+        "customer_zip" : customer_zip
+    }      
+
+    return render(request,'employees/pickup_list.html', context)
 
 @login_required
-def pickup_confirm(request, customer_balance):
+def pickup_confirm(request, customer_id):
+    Customer = apps.get_model('customers.Customer')
+    customer_object = Customer.objects.get(pk=customer_id)
+    # date_pickup = customer_object.date_of_last_pickup
+    update_pickup = customer_object(date_of_last_pickup = date.today())
+    update_pickup.save()
         # Customer = apps.get_model('customers.Customer')
         # customer_pickup= Customer.objects.filter(zip_code = employee_zip)
         # context={
         #     "customer_zip" : customer_zip
         # }      
-        customer_balance +=20
-        customer_balance.save()
-        return render(request, 'employees/pickup_list.html')
+        # customer_balance +=20
+        # customer_balance.save()
+    return render(request, 'employees/pickup_list.html')
   
         # return render(request, 'employees/pickup_list.html', context)
 

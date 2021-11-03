@@ -10,6 +10,6 @@ urlpatterns = [
     path('new/', views.create, name="create"),
     path('edit_profile/', views.edit_profile, name="edit_profile"),
     path('pickup_list/', views.pickup_list, name="pickup_list"),
-    path('pickup_confirm/<int:customer.id>', views.pickup_confirm, name="pickup_confirm"),
+    path('pickup_confirm/<int:customer_id>', views.pickup_confirm, name="pickup_confirm"),
 
 ]
