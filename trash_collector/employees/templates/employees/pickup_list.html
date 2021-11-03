@@ -27,7 +27,11 @@
     </tr>
     {%endfor%}
 </table>
-
+<h1>Select Day</h1>
+<button><a href = "{% url 'employees:sunday' %}">Sunday</a></button><button><a href = "{% url 'employees:monday' %}">Monday</a></button>
+<button><a href = "{% url 'employees:tuesday' %}">Tuesday</a></button><button><a href = "{% url 'employees:wednesday' %}">Wednesday</a></button>
+<button><a href = "{% url 'employees:thursday' %}">Thursday</a></button><button><a href = "{% url 'employees:friday' %}">Friday</a></button>
+<button><a href = "{% url 'employees:saturday' %}">Saturday</a></button>
 
 
 

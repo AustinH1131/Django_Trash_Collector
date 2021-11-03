@@ -30,7 +30,7 @@ It is your task to build out the employee-side of this application to allow empl
 
 - Pickup day is today’s day of week OR One-time pickup date that falls on today
 
-- Non-suspended accounts
+- Non-suspended accounts ----not done-------
 
 - Trash has not yet been picked up today
 
@@ -38,7 +38,7 @@ It is your task to build out the employee-side of this application to allow empl
 
 (5 points): As a registered employee, I want all confirmed pickups to have a charge of $20 applied to the customer.
 
-(10 points): As a registered employee, I want to be able to choose a day of the week to filter by, and see all customers who gets a weekly pickup on the day selected. (One time pickups do NOT need to be displayed)
+(10 points): As a registered employee, I want to be able to choose a day of the week to filter by, and see all customers who gets a weekly pickup on the day selected. (One time pickups do NOT need to be displayed) -----in progress--------
 
 (5 points): As an employee, I want to utilize an ‘employee_base.html’ parent template that includes a navbar to direct me to links for my default daily view, profile edit, and any other pages needed.
 
@@ -126,3 +126,9 @@ curr_date = date.today()
 
 chain on suspended date filter
  | Q (suspend_end <= curr_date)
+
+
+ add suspend end filter
+ # customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup = (calendar.day_name[curr_date.weekday()] or one_time_pickup == (curr_date.weekday))
+    # customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(Q(weekly_pickup = (calendar.day_name[curr_date.weekday()])) | Q(one_time_pickup = (curr_date))).exclude(date_of_last_pickup = curr_date)
+    

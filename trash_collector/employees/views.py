@@ -8,6 +8,7 @@ from datetime import date
 import calendar
 from django.apps import apps
 
+
 from .models import Employee
 
 
@@ -83,9 +84,8 @@ def pickup_list(request):
     logged_in_employee = Employee.objects.get(user=logged_in_user)
     Customer = apps.get_model('customers.Customer')
     employee_zip= logged_in_employee.zip_code
-    # customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup = (calendar.day_name[curr_date.weekday()] or one_time_pickup == (curr_date.weekday))
-    customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(Q(weekly_pickup = (calendar.day_name[curr_date.weekday()])) | Q(one_time_pickup = (curr_date))).exclude(date_of_last_pickup = curr_date)
-  
+    # customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(Q(weekly_pickup = (calendar.day_name[curr_date.weekday()])) | Q(one_time_pickup = (curr_date)))
+    customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(Q(weekly_pickup = (calendar.day_name[curr_date.weekday()])) | Q(one_time_pickup = (curr_date))).exclude(Q(date_of_last_pickup = curr_date) | Q(suspend_end__gt= curr_date, suspend_start__lt=curr_date))
     context={
         "customer_zip" : customer_zip
     }      
@@ -112,3 +112,86 @@ def pickup_confirm(request, customer_id):
   
         # return render(request, 'employees/pickup_list.html', context)
 
+@login_required
+def sunday(request):
+    logged_in_user=request.user
+    logged_in_employee = Employee.objects.get(user=logged_in_user)
+    Customer = apps.get_model('customers.Customer')
+    employee_zip= logged_in_employee.zip_code
+    customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup="Sunday")
+    context={
+        "customer_zip" : customer_zip
+    }      
+    return render(request,'employees/pickup_list.html', context)
+
+@login_required
+def monday(request):
+    logged_in_user=request.user
+    logged_in_employee = Employee.objects.get(user=logged_in_user)
+    Customer = apps.get_model('customers.Customer')
+    employee_zip= logged_in_employee.zip_code
+    customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup="Monday")
+    context={
+        "customer_zip" : customer_zip
+    }      
+    return render(request,'employees/pickup_list.html', context)
+
+@login_required
+def tuesday(request):
+    logged_in_user=request.user
+    logged_in_employee = Employee.objects.get(user=logged_in_user)
+    Customer = apps.get_model('customers.Customer')
+    employee_zip= logged_in_employee.zip_code
+    customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup="Tuesday")
+    context={
+        "customer_zip" : customer_zip
+    }      
+    return render(request,'employees/pickup_list.html', context)
+
+@login_required
+def wednesday(request):
+    logged_in_user=request.user
+    logged_in_employee = Employee.objects.get(user=logged_in_user)
+    Customer = apps.get_model('customers.Customer')
+    employee_zip= logged_in_employee.zip_code
+    customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup="Wednesday")
+    context={
+        "customer_zip" : customer_zip
+    }      
+    return render(request,'employees/pickup_list.html', context)
+
+@login_required
+def thursday(request):
+    logged_in_user=request.user
+    logged_in_employee = Employee.objects.get(user=logged_in_user)
+    Customer = apps.get_model('customers.Customer')
+    employee_zip= logged_in_employee.zip_code
+    customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup="Thursday")
+    context={
+        "customer_zip" : customer_zip
+    }      
+    return render(request,'employees/pickup_list.html', context)
+
+@login_required
+def friday(request):
+    logged_in_user=request.user
+    logged_in_employee = Employee.objects.get(user=logged_in_user)
+    Customer = apps.get_model('customers.Customer')
+    employee_zip= logged_in_employee.zip_code
+    customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup="Friday")
+    context={
+        "customer_zip" : customer_zip
+    }      
+    return render(request,'employees/pickup_list.html', context)
+
+@login_required
+def saturday(request):
+    logged_in_user=request.user
+    logged_in_employee = Employee.objects.get(user=logged_in_user)
+    Customer = apps.get_model('customers.Customer')
+    employee_zip= logged_in_employee.zip_code
+    customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup="Saturday")
+    context={
+        "customer_zip" : customer_zip
+    }      
+    return render(request,'employees/pickup_list.html', context)
