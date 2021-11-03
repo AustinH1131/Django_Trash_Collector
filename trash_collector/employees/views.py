@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
@@ -77,12 +77,11 @@ def edit_profile(request):
 
 @login_required
 def pickup_list(request):
-    curr_date = date.today()
     logged_in_user=request.user
     logged_in_employee = Employee.objects.get(user=logged_in_user)
     Customer = apps.get_model('customers.Customer')
     employee_zip= logged_in_employee.zip_code
-    customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup = (calendar.day_name[curr_date.weekday()]))
+    customer_zip= Customer.objects.filter(zip_code = employee_zip)
     context={
         "customer_zip" : customer_zip
     }      
@@ -103,7 +102,8 @@ def pickup_confirm(request, customer_id):
         # }      
         # customer_balance +=20
         # customer_balance.save()
-    return render(request, 'employees/pickup_list.html')
+    # return render(request, 'employees/pickup_list.html',)
+    return HttpResponseRedirect(reverse('employees:pickup_list'))
   
         # return render(request, 'employees/pickup_list.html', context)
 

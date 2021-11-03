@@ -20,7 +20,7 @@
     {% for customer in customer_zip%}     
     <tr><td>{{customer.name}} </td> 
         <td>{{customer.weekly_pickup}}</td> 
-        <td><a href = "{% url 'employees:pickup_confirm' customer.id %}">Confirm (Trust me, this is a button)</a> </td>
+        <td><button><a href = "{% url 'employees:pickup_confirm' customer.id %}">Confirm</a></button></td>
         <td>{{customer.one_time_pickup}}</td> 
         <td>{{customer.is_active}}</td> 
         <td>{{customer.date_of_last_pickup}}</td>

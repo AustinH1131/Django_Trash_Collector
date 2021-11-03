@@ -118,3 +118,8 @@ local_settings.py will be gone, be sure to save the one from previous version, o
 -->
 
 pickup_confirmed({{customer.balance}})
+
+
+to get the day of week as string
+curr_date = date.today()
+.filter(weekly_pickup = (calendar.day_name[curr_date.weekday()])
