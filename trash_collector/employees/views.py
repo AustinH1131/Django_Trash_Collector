@@ -94,8 +94,8 @@ def pickup_confirm(request, customer_id):
     Customer = apps.get_model('customers.Customer')
     customer_object = Customer.objects.get(pk=customer_id)
     # date_pickup = customer_object.date_of_last_pickup
-    update_pickup = customer_object(date_of_last_pickup = date.today())
-    update_pickup.save()
+    customer_object.date_of_last_pickup = date.today()
+    customer_object.save()
         # Customer = apps.get_model('customers.Customer')
         # customer_pickup= Customer.objects.filter(zip_code = employee_zip)
         # context={
