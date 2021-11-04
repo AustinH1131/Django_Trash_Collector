@@ -4,7 +4,10 @@
 {% block content %}
 <br />
 <form action="{% url 'employees:pickup_list' %}" method="post">
-<head>Pickup Routes</head>
+<h1>Pickup Routes</h1>
+<head> 1=Active 
+     0=Not Active
+</head>
 <p>
     {%csrf_token%}
 
@@ -39,14 +42,14 @@
 </table>
 {{curr_date}}
 <h1>Select Day</h1>
-<button><a href = "{% url 'employees:sunday' %}">Sunday</a></button>
-<button><a href = "{% url 'employees:monday' %}">Monday</a></button>
-<button><a href = "{% url 'employees:tuesday' %}">Tuesday</a></button>
-<button><a href = "{% url 'employees:wednesday' %}">Wednesday</a></button>
-<button><a href = "{% url 'employees:thursday' %}">Thursday</a></button>
-<button><a href = "{% url 'employees:friday' %}">Friday</a></button>
-<button><a href = "{% url 'employees:saturday' %}">Saturday</a></button>
-<button><a href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ">Holiday</a></button>
+<button type="button" class="btn-primary"><a class="btn-link" href = "{% url 'employees:sunday' %}">Sunday</a></button>
+<button type="button" class="btn-primary"><a class="btn-link" href = "{% url 'employees:monday' %}">Monday</a></button>
+<button type="button" class="btn-primary"><a class="btn-link" href = "{% url 'employees:tuesday' %}">Tuesday</a></button>
+<button type="button" class="btn-primary"><a class="btn-link" href = "{% url 'employees:wednesday' %}">Wednesday</a></button>
+<button type="button" class="btn-primary"><a class="btn-link" href = "{% url 'employees:thursday' %}">Thursday</a></button>
+<button type="button" class="btn-primary"><a class="btn-link" href = "{% url 'employees:friday' %}">Friday</a></button>
+<button type="button" class="btn-primary"><a class="btn-link" href = "{% url 'employees:saturday' %}">Saturday</a></button>
+<button type="button" class="btn-primary"><a class="btn-link" href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ">Holiday</a></button>
 
 
 
