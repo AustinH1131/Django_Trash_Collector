@@ -1,7 +1,8 @@
 from django import forms
 from .models import User
 from django.contrib.auth.models import Group
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.forms.widgets import PasswordInput, TextInput
 
 
 class CustomUserForm(UserCreationForm):
@@ -27,5 +28,7 @@ class CustomUserForm(UserCreationForm):
                 customers = Group.objects.get(name="Customers")
                 customers.user_set.add(user)
         return user
-
-
+# Added for login form placeholder text
+class CustomAuthForm(AuthenticationForm):
+    username = forms.CharField(widget=TextInput(attrs={'class':'validate','placeholder': 'Email'}))
+    password = forms.CharField(widget=PasswordInput(attrs={'placeholder':'Password'}))

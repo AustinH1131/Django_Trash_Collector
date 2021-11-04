@@ -28,5 +28,6 @@ urlpatterns = [
     # Adding all urls from employees app
     path('employees/', include('employees.urls')),
     # 'home' redirects a user to the appropriate index based on their auth group. Investigate trash_collector/views.py for more info
-    path('', views.group_redirect, name='home')
+    path('', views.group_redirect, name='home'),
+
 ]
