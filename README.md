@@ -132,3 +132,33 @@ chain on suspended date filter
  # customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup = (calendar.day_name[curr_date.weekday()] or one_time_pickup == (curr_date.weekday))
     # customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(Q(weekly_pickup = (calendar.day_name[curr_date.weekday()])) | Q(one_time_pickup = (curr_date))).exclude(date_of_last_pickup = curr_date)
     
+
+
+     {{customer.suspend_start}}
+        {{customer.suspend_end}}
+        {% if customer.suspend_start <= curr_date and customer.suspend_end >= curr_date %}
+        <td> NO </td>
+        {% else %}
+        <td> YES </td>
+        {% endif %}
+
+
+{% block content %}
+<br />
+<form action="{% url 'employees:edit_profile' %}" method="post">
+    {% csrf_token %}
+    Name: <input type="text" name="name" id="name" value="{{logged_in_employee.name}}">
+    <br />
+    <br />
+    Address: <input type="text" name="address" id="address" value="{{logged_in_employee.address}}">
+    <br />
+    <br />
+    Zip Code: <input type="text" name="zip_code" id="zip_code" value="{{logged_in_employee.zip_code}}">
+    <br />
+    <br />
+    Weekly Pickup Day: <input type="text" name="weekly" id="weekly" value="{{logged_in_employee.weekly_pickup}}">
+    <br />
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock %}

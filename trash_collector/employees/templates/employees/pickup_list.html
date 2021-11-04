@@ -5,8 +5,7 @@
 <br />
 <form action="{% url 'employees:pickup_list' %}" method="post">
 <h1>Pickup Routes</h1>
-<head> 1=Active 
-     0=Not Active
+<head>
 </head>
 <p>
     {%csrf_token%}
@@ -27,9 +26,7 @@
     <tr><td>{{customer.name}} </td> 
         <td>{{customer.weekly_pickup}}</td> 
         <td><button type="button" class="btn-primary"><a class="btn-link" href = "{% url 'employees:pickup_confirm' customer.id %}" >Confirm</a></button></td>
-        <td>{{customer.one_time_pickup}}</td> 
-        {{customer.suspend_start}}
-        {{customer.suspend_end}}
+        <td>{{customer.one_time_pickup}}</td>
         {% if customer.suspend_start <= curr_date and customer.suspend_end >= curr_date %}
         <td> NO </td>
         {% else %}
@@ -40,7 +37,6 @@
     {%endfor%}
   </tbody>
 </table>
-{{curr_date}}
 <h1>Select Day</h1>
 <button type="button" class="btn-primary"><a class="btn-link" href = "{% url 'employees:sunday' %}">Sunday</a></button>
 <button type="button" class="btn-primary"><a class="btn-link" href = "{% url 'employees:monday' %}">Monday</a></button>

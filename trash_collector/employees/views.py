@@ -134,13 +134,9 @@ def monday(request):
     employee_zip= logged_in_employee.zip_code
     customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup="Monday")
     curr_date = date.today()
-    # if customer_zip.suspend_end __gt= curr_date and customer_zip.suspend_start __lt= curr_date:
-    #     active = "Yes"
-    # else:
-    #     active = "No"
     context={
         "customer_zip" : customer_zip,
-        # "active" : active
+        "curr_date": curr_date
     }      
     return render(request,'employees/pickup_list.html', context)
 
@@ -152,8 +148,10 @@ def tuesday(request):
     Customer = apps.get_model('customers.Customer')
     employee_zip= logged_in_employee.zip_code
     customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup="Tuesday")
+    curr_date = date.today()
     context={
-        "customer_zip" : customer_zip
+        "customer_zip" : customer_zip,
+        "curr_date": curr_date
     }      
     return render(request,'employees/pickup_list.html', context)
 
@@ -164,8 +162,10 @@ def wednesday(request):
     Customer = apps.get_model('customers.Customer')
     employee_zip= logged_in_employee.zip_code
     customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup="Wednesday")
+    curr_date = date.today()
     context={
-        "customer_zip" : customer_zip
+        "customer_zip" : customer_zip,
+        "curr_date": curr_date
     }      
     return render(request,'employees/pickup_list.html', context)
 
@@ -176,8 +176,10 @@ def thursday(request):
     Customer = apps.get_model('customers.Customer')
     employee_zip= logged_in_employee.zip_code
     customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup="Thursday")
+    curr_date = date.today()
     context={
-        "customer_zip" : customer_zip
+        "customer_zip" : customer_zip,
+        "curr_date": curr_date
     }      
     return render(request,'employees/pickup_list.html', context)
 
@@ -188,8 +190,10 @@ def friday(request):
     Customer = apps.get_model('customers.Customer')
     employee_zip= logged_in_employee.zip_code
     customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup="Friday")
+    curr_date = date.today()
     context={
-        "customer_zip" : customer_zip
+        "customer_zip" : customer_zip,
+        "curr_date": curr_date
     }      
     return render(request,'employees/pickup_list.html', context)
 
@@ -200,7 +204,9 @@ def saturday(request):
     Customer = apps.get_model('customers.Customer')
     employee_zip= logged_in_employee.zip_code
     customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup="Saturday")
+    curr_date = date.today()
     context={
-        "customer_zip" : customer_zip
+        "customer_zip" : customer_zip,
+        "curr_date": curr_date
     }      
     return render(request,'employees/pickup_list.html', context)

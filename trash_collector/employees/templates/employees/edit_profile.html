@@ -8,18 +8,22 @@
 <br />
 <form action="{% url 'employees:edit_profile' %}" method="post">
     {% csrf_token %}
-    Name: <input type="text" name="name" id="name" value="{{logged_in_employee.name}}">
+<table  margin="auto">
+    <col style = "width: 200px">
+    <tr><td align="left">Name:</td> <td align="left"><input type="text" name="name" id="name" value="{{logged_in_employee.name}}"></td></tr>
     <br />
     <br />
-    Address: <input type="text" name="address" id="address" value="{{logged_in_employee.address}}">
+    <tr><td align="left">Address:</td> <td align="left"> <input type="text" name="address" id="address" value="{{logged_in_employee.address}}"></td></tr>
     <br />
     <br />
-    Zip Code: <input type="text" name="zip_code" id="zip_code" value="{{logged_in_employee.zip_code}}">
+    <tr><td align="left">Zip Code:</td> <td align="left"> <input type="text" name="zip_code" id="zip_code" value="{{logged_in_employee.zip_code}}"></td></tr>
     <br />
     <br />
-    Weekly Pickup Day: <input type="text" name="weekly" id="weekly" value="{{logged_in_employee.weekly_pickup}}">
+    <tr><td align="left">Weekly Pickup Day: </td> <td align="left"><input type="text" name="weekly" id="weekly" value="{{logged_in_employee.weekly_pickup}}"></td></tr>
+</table>
     <br />
-    <input type="submit" value="Submit">
+    <br />
+    <input class = "btn-primary" type="submit" value="Submit">
 </form>
 
 {% endblock %}
