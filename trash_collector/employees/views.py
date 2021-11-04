@@ -133,14 +133,14 @@ def monday(request):
     Customer = apps.get_model('customers.Customer')
     employee_zip= logged_in_employee.zip_code
     customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup="Monday")
-    # curr_date = date.today()
+    curr_date = date.today()
     # if customer_zip.suspend_end __gt= curr_date and customer_zip.suspend_start __lt= curr_date:
     #     active = "Yes"
     # else:
     #     active = "No"
     context={
         "customer_zip" : customer_zip,
-    #     "active" : active
+        # "active" : active
     }      
     return render(request,'employees/pickup_list.html', context)
 
