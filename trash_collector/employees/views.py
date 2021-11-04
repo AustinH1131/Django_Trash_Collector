@@ -7,6 +7,7 @@ from django.db.models import Q
 from datetime import date
 import calendar
 from django.apps import apps
+from django.contrib.auth import get_user_model
 
 
 from .models import Employee
@@ -100,6 +101,7 @@ def pickup_confirm(request, customer_id):
     customer_object.date_of_last_pickup = date.today()
     customer_object.balance -= 20
     customer_object.save()
+  
         # Customer = apps.get_model('customers.Customer')
         # customer_pickup= Customer.objects.filter(zip_code = employee_zip)
         # context={
@@ -121,7 +123,7 @@ def sunday(request):
     customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup="Sunday")
     context={
         "customer_zip" : customer_zip
-    }      
+    }     
     return render(request,'employees/pickup_list.html', context)
 
 @login_required
@@ -131,10 +133,17 @@ def monday(request):
     Customer = apps.get_model('customers.Customer')
     employee_zip= logged_in_employee.zip_code
     customer_zip= Customer.objects.filter(zip_code = employee_zip).filter(weekly_pickup="Monday")
+    # curr_date = date.today()
+    # if customer_zip.suspend_end __gt= curr_date and customer_zip.suspend_start __lt= curr_date:
+    #     active = "Yes"
+    # else:
+    #     active = "No"
     context={
-        "customer_zip" : customer_zip
+        "customer_zip" : customer_zip,
+    #     "active" : active
     }      
     return render(request,'employees/pickup_list.html', context)
+
 
 @login_required
 def tuesday(request):
