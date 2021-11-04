@@ -25,12 +25,19 @@
         <td>{{customer.weekly_pickup}}</td> 
         <td><button type="button" class="btn-primary"><a class="btn-link" href = "{% url 'employees:pickup_confirm' customer.id %}" >Confirm</a></button></td>
         <td>{{customer.one_time_pickup}}</td> 
-        <td>{{customer.is_active}}</td> 
+        {{customer.suspend_start}}
+        {{customer.suspend_end}}
+        {% if customer.suspend_start <= curr_date and customer.suspend_end >= curr_date %}
+        <td> NO </td>
+        {% else %}
+        <td> YES </td>
+        {% endif %}
         <td>{{customer.date_of_last_pickup}}</td>
     </tr>
     {%endfor%}
   </tbody>
 </table>
+{{curr_date}}
 <h1>Select Day</h1>
 <button><a href = "{% url 'employees:sunday' %}">Sunday</a></button>
 <button><a href = "{% url 'employees:monday' %}">Monday</a></button>
